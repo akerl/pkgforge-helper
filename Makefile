@@ -1,8 +1,8 @@
-DOCKER_CMD = "docker run" \
-	"--rm -t -i" \
-	"-v ~/.gitconfig:/etc/gitconfig" \
-	"-v $$(pwd):/opt/build" \
-	"dock0/pkgforge"
+DOCKER_CMD = docker run \
+	--rm -t -i \
+	-v ~/.gitconfig:/etc/gitconfig \
+	-v $$(pwd):/opt/build \
+	dock0/pkgforge
 
 .PHONY : default manual dircheck container
 
