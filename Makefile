@@ -1,6 +1,7 @@
 DOCKER_CMD = docker run \
 	--rm -t -i \
-	-v ~/.gitconfig:/etc/gitconfig \
+	-e GIT_AUTHOR_NAME \
+	-e GIT_AUTHOR_EMAIL \
 	-v $$(pwd):/opt/build \
 	dock0/pkgforge
 
@@ -11,7 +12,6 @@ default: dircheck container
 
 manual: dircheck container
 	$(DOCKER_CMD) bash || true
-
 
 ifneq ("$(wildcard .pkgforge)","")
 dircheck:
