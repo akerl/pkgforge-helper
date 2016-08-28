@@ -9,11 +9,19 @@ DOCKER_CMD = docker run \
 
 .PHONY : default manual dircheck container
 
-default: dircheck container
+default: dircheck container auth
 	$(DOCKER_CMD)
 
-manual: dircheck container
+manual: dircheck container auth
 	$(DOCKER_CMD) bash || true
+
+ifdef GITHUB_CREDS
+auth:
+	git remote set-url origin "https://$(GITHUB_CREDS)@github.com/$(git remote get-url origin | sed 's/.*://;s/\.git//')"
+else
+auth:
+	@true
+endif
 
 ifneq ("$(wildcard .pkgforge)","")
 dircheck:
