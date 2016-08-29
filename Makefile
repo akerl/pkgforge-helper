@@ -17,7 +17,9 @@ manual: dircheck container auth
 
 ifdef GITHUB_CREDS
 auth:
-	git remote set-url origin "https://$(GITHUB_CREDS)@github.com/$(git remote get-url origin | sed 's/.*://;s/\.git//')"
+	git config 'url.https://github.com/.insteadOf' 'git@github.com:'
+	git config credential.helper store
+	@echo "https://$(GITHUB_CREDS)@github.com" > ~/.git-credentials || true
 else
 auth:
 	@true
