@@ -20,6 +20,7 @@ auth:
 	git config 'url.https://github.com/.insteadOf' 'git@github.com:'
 	git config credential.helper 'store --file=/opt/build/.github'
 	@echo "https://$(GITHUB_CREDS)@github.com" > .github || true
+	@echo "targit: $(GITHUB_CREDS)" > .targit || true
 else
 auth:
 	@true
