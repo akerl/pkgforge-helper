@@ -1,9 +1,5 @@
 DOCKER_CMD = docker run \
 	--rm -t -i \
-	-e GIT_AUTHOR_NAME \
-	-e GIT_AUTHOR_EMAIL \
-	-e GIT_COMMITTER_NAME="$$GIT_AUTHOR_NAME" \
-	-e GIT_COMMITTER_EMAIL="$$GIT_AUTHOR_EMAIL" \
 	-v $$(pwd):/opt/build \
 	dock0/pkgforge
 
@@ -22,10 +18,7 @@ prereqs: dircheck container auth
 
 ifdef GITHUB_CREDS
 auth:
-	git config 'url.https://github.com/.insteadOf' 'git@github.com:'
-	git config credential.helper 'store --file=/opt/build/.github'
-	@echo "https://$(GITHUB_CREDS)@github.com" > .github || true
-	@echo "targit: $(GITHUB_CREDS)" > .targit || true
+	@echo "targit: $(GITHUB_CREDS)" > .github || true
 else
 auth:
 	@true
