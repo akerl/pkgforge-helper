@@ -7,13 +7,18 @@ DOCKER_CMD = docker run \
 	-v $$(pwd):/opt/build \
 	dock0/pkgforge
 
-.PHONY : default manual dircheck container
+.PHONY : default manual dircheck container prereqs release
 
-default: dircheck container auth
+default: prereqs
 	$(DOCKER_CMD)
 
-manual: dircheck container auth
+release: prereqs
+	$(DOCKER_CMD) pkgforge release
+
+manual: prereqs
 	$(DOCKER_CMD) bash || true
+
+prereqs: dircheck container auth
 
 ifdef GITHUB_CREDS
 auth:
