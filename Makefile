@@ -36,7 +36,7 @@ endif
 ifneq ("$(wildcard Dockerfile)","")
 CONTAINER_NAME = $$(awk '/^name / {print $2}' .pkgforge | tr -d "'")
 container:
-	docker build -t $(CONTAINER_NAME)-pkg
+	docker build -t $(CONTAINER_NAME)-pkg .
 else
 container:
 	@true
