@@ -1,7 +1,7 @@
 DOCKER_CMD = docker run \
 	--rm -t -i \
 	-v $$(pwd):/opt/build \
-	dock0/pkgforge
+	$(CONTAINER_NAME)
 
 .PHONY : default manual dircheck container prereqs release
 
@@ -38,6 +38,7 @@ CONTAINER_NAME = $$(awk '/^name / {print $$2}' .pkgforge | tr -d "'")
 container:
 	docker build -t $(CONTAINER_NAME)-pkg .
 else
+CONTAINER_NAME = dock0/pkgforge
 container:
 	@true
 endif
