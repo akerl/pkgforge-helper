@@ -34,9 +34,9 @@ dircheck:
 endif
 
 ifneq ("$(wildcard Dockerfile)","")
-CONTAINER_NAME = $$(awk '/^name / {print $$2}' .pkgforge | tr -d "'")
+CONTAINER_NAME = $$(awk '/^name / {print $$2}' .pkgforge | tr -d "'")-pkg
 container:
-	docker build -t $(CONTAINER_NAME)-pkg .
+	docker build -t $(CONTAINER_NAME) .
 else
 CONTAINER_NAME = dock0/pkgforge
 container:
