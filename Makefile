@@ -6,10 +6,10 @@ DOCKER_CMD = docker run \
 .PHONY : default manual dircheck container prereqs release
 
 default: prereqs
-	$(DOCKER_CMD)
+	$(DOCKER_CMD) pkgforge build $(PKGFORGE_FLAGS)
 
 release: prereqs
-	$(DOCKER_CMD) pkgforge release
+	$(DOCKER_CMD) pkgforge release $(PKGFORGE_FLAGS)
 
 manual: prereqs
 	$(DOCKER_CMD) bash || true
@@ -22,6 +22,14 @@ auth:
 else
 auth:
 	@true
+endif
+
+PKGFORGE_FLAGS =
+ifdef PKGFORGE_STATEFILE
+PKGFORGE_FLAGS += --statefile $(PKGFORGE_STATEFILE)
+endif
+ifdef DEBUG
+PKGFORGE_FLAGS += -ts
 endif
 
 ifneq ("$(wildcard .pkgforge)","")
