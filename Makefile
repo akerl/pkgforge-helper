@@ -1,6 +1,7 @@
 DOCKER_CMD = docker run \
 	--rm -t -i \
 	-v $$(pwd):/opt/build \
+	-v /tmp:/tmp \
 	$(CONTAINER_NAME)
 
 .PHONY : default manual dircheck container prereqs release
