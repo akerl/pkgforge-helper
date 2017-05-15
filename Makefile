@@ -18,8 +18,9 @@ manual: prereqs
 prereqs: dircheck container auth
 
 ifdef GITHUB_CREDS
+GITHUB_CRED_NAME ?= targit
 auth:
-	@echo "targit: $(GITHUB_CREDS)" > .github || true
+	@echo "$(GITHUB_CRED_NAME): $(GITHUB_CREDS)" > .github || true
 else
 auth:
 	@true
