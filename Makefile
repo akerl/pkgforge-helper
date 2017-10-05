@@ -2,6 +2,7 @@ DOCKER_CMD = docker run \
 	--rm -t -i \
 	-v $$(pwd):/opt/build \
 	-v /tmp:/tmp \
+	$(DOCKER_FLAGS) \
 	$(CONTAINER_NAME)
 
 .PHONY : default manual dircheck container prereqs release
@@ -53,3 +54,8 @@ container:
 	@true
 endif
 
+ifneq ("$(wildcard docker.conf)","")
+DOCKER_FLAGS = $$(cat docker.conf)
+else
+DOCKER_FLAGS =
+endif
