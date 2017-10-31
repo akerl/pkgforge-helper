@@ -5,10 +5,13 @@ DOCKER_CMD = docker run \
 	$(DOCKER_FLAGS) \
 	$(CONTAINER_NAME)
 
-.PHONY : default manual dircheck container prereqs release
+.PHONY : default manual dircheck container prereqs release build
 
 default: prereqs
 	$(DOCKER_CMD) pkgforge build $(PKGFORGE_FLAGS)
+
+build: prereqs
+	pkgforge build -ts
 
 release: prereqs
 	$(DOCKER_CMD) pkgforge release $(PKGFORGE_FLAGS)
