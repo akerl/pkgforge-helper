@@ -58,7 +58,7 @@ container:
 endif
 
 ifneq ("$(wildcard docker.conf)","")
-DOCKER_FLAGS = $$(cat docker.conf)
+DOCKER_FLAGS = $(shell cat docker.conf)
 else
 DOCKER_FLAGS =
 endif
