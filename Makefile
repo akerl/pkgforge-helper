@@ -1,5 +1,5 @@
 DOCKER_CMD = docker run \
-	--rm -t -i \
+	--rm -i $(TTY_FLAG) \
 	-v $$(pwd):/opt/build \
 	-v /tmp:/tmp \
 	$(DOCKER_FLAGS) \
@@ -61,4 +61,10 @@ ifneq ("$(wildcard docker.conf)","")
 DOCKER_FLAGS = $(shell cat docker.conf)
 else
 DOCKER_FLAGS =
+endif
+
+ifdef GITHUB_ACTIONS
+TTY_FLAG = 
+else
+TTY_FLAG = -t
 endif
