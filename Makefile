@@ -10,7 +10,7 @@ DOCKER_CMD = docker run \
 default: prereqs
 	$(DOCKER_CMD) pkgforge build $(PKGFORGE_FLAGS)
 
-build: prereqs
+build: dircheck
 	pkgforge build -ts
 
 release: prereqs
