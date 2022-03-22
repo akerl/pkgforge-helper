@@ -52,7 +52,7 @@ CONTAINER_NAME = $$(awk '/^name / {print tolower($$2)}' .pkgforge | tr -d "'")-p
 container:
 	docker build -t $(CONTAINER_NAME) .
 else
-CONTAINER_NAME = docker.pkg.github.com/dock0/pkgforge/pkgforge:latest
+CONTAINER_NAME = ghcr.io/dock0/pkgforge/pkgforge:latest
 container:
 	@true
 endif
